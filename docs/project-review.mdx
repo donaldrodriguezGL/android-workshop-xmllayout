@@ -1,0 +1,42 @@
+# 1. Project review
+
+## Design and requirements
+
+The requirements for the project are:
+1. Create a list screen that load and shows items that represent the Gorilla Logic perks (title, description and image).
+1. The list must be dynamically loaded.
+1. Create a detail screen showing the details of the perk (title, description and image).
+1. The app must navigate to the detail screen when the user selects one of the items in the list.
+1. The app must come back to the main screen when the back button is pressed in the details screen.
+
+The desired design for the app is simple using the default theme, colors and style provided by `Android Studio`
+
+</br>
+<img src="images/2-image.png" width="50%"  alt="create new empty views activity project"/>
+</br>
+
+## MVVM design pattern
+
+This pattern helps to separate an application's bussiness and presentation logic from the user interface.
+There are three main components in the MVVM pattern, the `Model`, the `View` and the `ViewModel`. 
+This diagram shows the relationship between them in an Android Application:
+
+</br>
+<img src="images/3-image.png" width="70%"  alt="create new empty views activity project"/>
+</br>
+
+#### View
+
+It is responsible to define the layouts and the appearance of the application `UI`. The `View` communicate to the `ViewModel` any user input or action like tapping a `Button` or typing in a `TextView`.
+In Android, the `View` is handled by `Activities`, `Fragments` and the `Layout` that is inflated by them. 
+
+#### ViewModel
+
+The `ViewModel` implements the data binding to which the view can communicate to, and notifies the `View` of any state changes. Also handles the data updates to and from the `Model`.
+In Android, there is nativelly a robust `ViewModel` class that help us to handle this communication in an easy and clean way. 
+
+#### Model
+
+The Model classes are in charge of handling the bussiness logic and data of the application. They are typically used in conjunction with services and repositories to encapsulate data access and caching.
+
+---
