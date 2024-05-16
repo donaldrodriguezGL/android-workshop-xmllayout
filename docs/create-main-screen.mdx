@@ -9,6 +9,7 @@ The `Activity` is a class designed to be the main point to start an Android appl
 For more information, check the official documentation at <a href="https://developer.android.com/guide/components/activities/intro-activities" target="_blank">Activities</a>.
 
 The `Fragment` represents a reusable portion of the user interface, it defines and manages its own layout. `Fragments` must be hosted by and `Activity` or another `Fragment`. 
+
 For this workshop, we will create two fragments for each of the screens `Main` and `Details` screens.
 
 For more information, check the official documentation at <a href="https://developer.android.com/guide/fragments" target="_blank">Fragments</a>.
@@ -16,6 +17,7 @@ For more information, check the official documentation at <a href="https://devel
 ## Layouts
 
 A Layout is a `ViewGroup` designed to hold more items and organize them according to rules added to their children.
+
 In Android, we have different layouts to create amazing user interfaces:
 
 #### FrameLayout
@@ -39,6 +41,7 @@ For more information, check the official documentation at <a href="https://devel
 ## Jetpack Navigation Component
 
 This component help us organize and manage the navigation between screens (fragments) in our app.
+
 For this workshop we will use it to handle the navigation between the main and details screens.
 
 For more information, check the official documentation at <a href="https://developer.android.com/guide/navigation" target="_blank">Jetpack Navigation Component</a>.
@@ -47,18 +50,22 @@ Let's add the navigation component to our project:
 
 ### Add Libraries
 
-In order to be able to use the navigation component, we need to add the library as a dependency to the project. For this work, we have a Graddle file that handle all those dependencies and configure them for our project.
+In order to be able to use the navigation component, we need to add the library as a dependency to the project. 
+
+For this work, we have a `Graddle` file that handle all those dependencies and configure them for our project.
 
 Each module have his own graddle file, a Android project may have several modules. In out case, we only have one module, the main app.
 
-Let's add the `jetpack navigation` libraries to our graddle module file:
+Let's add the `jetpack navigation` libraries to our graddle module file.
 
-1. Open the `build.gradle.kts` file:
+1. Open the `build.gradle.kts` file
+    <br/>
     <br/>
     <img src="images/25-image.png" width="70%" alt="Gradle file"/>
     <br/>
 
-1. Add these three lines of code inside the `dependencies` section, right before `testImplementation(..)`.
+1. Add these three lines of code inside the `dependencies` section, right before `testImplementation(..)`
+
     ```kotlin
     dependencies {
         ...
@@ -71,25 +78,32 @@ Let's add the `jetpack navigation` libraries to our graddle module file:
         ...
     }
     ```
+
 1. Now, we need to sync gradle dependencies, it will download required libraries (source coee) and sync the project with them. Use the `Sync Now` button at the top right of the gradle file editor
+    <br/>
     <br/>
     <img src="images/26-image.png" width="50%" alt="Sync gradle"/>
     <br/>
 
 ### Navigation Graph
 
-It is an XML resource that contains all navigation-related information in one centralized location. This includes all of the individual content areas within your app, called destinations, as well as the possible paths that a user can take through your app.
+It is an XML resource that contains all navigation-related information in one centralized location. 
+
+This includes all of the individual content areas within your app, called destinations, as well as the possible paths that a user can take through your app.
 
 We will create two destinations in our navigation graph, for now, let's add the main screen, later we will add the details screen.
 
 1. Create new `navigation` folder into `resources (res folder)`
+    <br/>
     <br/>
     <img src="images/4-image.png" width="50%"  alt="navigation folder"/>
     <br/>
 
 1. Create new `navigation resource` file into the `navigation` folder and name it `nav_graph`
     <br/>
+    <br/>
     <img src="images/5-image.png" width="80%"  alt="new project screen properties"/>
+    <br/>
     <br/>
     <img src="images/6-image.png" width="80%"  alt="new project screen properties"/>
     <br/>
@@ -97,25 +111,34 @@ We will create two destinations in our navigation graph, for now, let's add the 
 ### NavHost
 
 It is an empty container that displays destinations from your navigation graph. 
+
 The `Navigation` component contains a default `NavHost` implementation, `NavHostFragment`, that displays fragment destinations.
 
 Let's add the nav host for our project:
 
-1. The main `Activity` of the project is named `MainActivity`, the layout for this activity is named `activity_main.xml`. 
-To setup the `NavHost`, open `activity_main.xml` that is located at the folder `res/layout/activity_main.xml`
-<br/>
-<img src="images/27-image.png" width="60%"  alt="activity layout location"/>
-<br/>
+1. The main `Activity` of the project is named `MainActivity`, the layout for this activity is `activity_main.xml`.
+
+    To setup the `NavHost`, open `activity_main.xml` that is located at the folder `res/layout/activity_main.xml`
+    <br/>
+    <br/>
+    <img src="images/27-image.png" width="60%"  alt="activity layout location"/>
+    <br/>
 
 1. Open that file and in the right side, select to `split` the `code` and `layout` of the xml. That will let you see the code and the design at the same time.
-Right now you should see the `Hello World` text view at the center of the screen.
-<br/>
-<img src="images/28-image.png" width="80%"  alt="activity layout location"/>
-<br/>
+
+    Right now you should see the `Hello World` text view at the center of the screen.
+    <br/>
+    <br/>
+    <img src="images/28-image.png" width="80%"  alt="activity layout location"/>
+    <br/>
 
 1. Now, let's set the activity main entry point a `FragmentContainerView`, and associate it with the `nav graph` that we already created.
-That means the application will use the `nav_graph` we created as the main source of navigation of the app. Any fragment the app will manipulate, should be inside the nav_graph file.
-Let's replace the `TextView` with this code:
+
+    That means the application will use the `nav_graph` we created as the main source of navigation of the app.
+
+    Any fragment the app will manipulate, should be inside the `nav_graph` file.
+    
+    Let's replace the `TextView` with this code:
 
     ```xml
     <androidx.fragment.app.FragmentContainerView
@@ -139,20 +162,29 @@ Let's add the first `Fragment` to the project, the `Main Screen`:
 
 1. Create new `package` with the name `com.gorillalogic.workshoplayout.home`:
     <br/>
+    <br/>
     <img src="images/7-image.png" width="80%"  alt="new package"/>
+    <br/>
+    <br/>
     <img src="images/29-image.png" width="50%"  alt="new package home"/>
     <br/>
+
 1. Inside the new `home package`, create a new `blank fragment` and set the name to `HomeScreenFragment`:
+    <br/>
     <br/>
     <img src="images/8-image.png" width="80%"  alt="new  blank fragment"/>
     <br/>
+    <br/>
     <img src="images/9-image.png" width="80%"  alt="new fragment"/>
     <br/>
+    
     As you can see, you will create two new files: 
     - `HomeScreenFragment.kt`: This contains all the kotlin source code, and is responsible to handle the life cycle of the fragment and to inflate the UI.
     - `fragment_home_screen.xml`: This file contains the design of the fragment. This file is used by the fragment to present the UI to the user and interact with him.
 
-1. Now, open the source code file `HomeScreenFragment.kt` and replace the contents of it with the next code. It is simply overriding the `onCreatedView` method to `inflate` the layout and assign it as the view of the `Fragment`
+1. Now, open the source code file `HomeScreenFragment.kt` and replace the contents of it with the next code.
+
+    It is simply overriding the `onCreatedView` method to `inflate` the layout and assign it as the view of the `Fragment`
 
     ```kotlin
     package com.gorillalogic.workshoplayout.home
@@ -180,22 +212,26 @@ Let's add the first `Fragment` to the project, the `Main Screen`:
     ```
 
 1. Now we need to add the new `main screen` to the `nav_graph` so the application knows what is the main destination to show first.
-Open `nav_graph.xml` from the navigation folder and select to add a `new destination`, the button is located at the top left:
+    Open `nav_graph.xml` from the navigation folder and select to add a `new destination`, the button is located at the top left:
+    <br/>
     <br/>
     <img src="images/30-image.png" width="60%"  alt="new destination"/>
     <br/>
 
 1. Now select the `fragment_home_screen` from the list of destinations:
     <br/>
+    <br/>
     <img src="images/31-image.png" width="60%"  alt="select destination"/>
     <br/>
 
 1. Make sure to set the `fragment_home_screen` as the start destination using the `home` icon button at the top, next to the `new destination` button
     <br/>
+    <br/>
     <img src="images/32-image.png" width="60%"  alt="select destination"/>
     <br/>
 
 1. At the end, the `nav_graph` design should looks like this:
+    <br/>
     <br/>
     <img src="images/33-image.png" width="80%"  alt="select destination"/>
     <br/>
@@ -213,40 +249,49 @@ We will use a `RecyclerView` in our main fragment to show the list of items.
 ### ViewHolder
 
 Each individual element in the list is defined by a `view holder` object. When the `view holder` is created, it doesn’t have any data associated with it. 
+
 The `RecyclerView` binds the data to the `view holder` once it is created or reused.
 You define the `view holder` by extending `RecyclerView.ViewHolder`.
 
 We will start by creating the view holder for the items in the list:
 
 1. First, we need to import the images that represent each one of the items to the project.
-Download and extract the contents of the <a href="images.zip" target="_blank">images.zip</a> file. 
-Copy the six images into the `res/drawable` folder in the project:
+
+    Download and extract the contents of the <a href="images.zip" target="_blank">images.zip</a> file. 
+
+    Copy the six images into the `res/drawable` folder in the project:
+    <br/>
     <br/>
     <img src="images/10-image.png" width="70%" alt="import images"/>
     <br/>
 
 1. Select refactor in the popup alert that appears:
     <br/>
+    <br/>
     <img src="images/34-image.png" width="70%" alt="refactor images"/>
     <br/>
 
 1. You should now have the six new images into the drawable folder:
+    <br/>
     <br/>
     <img src="images/35-image.png" width="70%" alt="images into drawable folder"/>
     <br/>
 
 1. Each one of the items, require a layout for the UI. Let's create a new `Layout Resource File` for the home list item into the `layout` folder:
     <br/>
+    <br/>
     <img src="images/11-image.png" width="80%" alt="new layout resource file"/>
     <br/>
 
 1. Set the name to `home_item`, leave the rest as it is and select `OK`:
     <br/>
+    <br/>
     <img src="images/12-image.png" width="80%" alt="new layout resource file"/>
     <br/>
 
 1. Replace the contents of the `home_item.xml` file with the next `xml`.
-Remember to select `Split` from the top right options of the editor to see the `xml source code` next to the `preview` <img src="images/36-image.png" width="60" alt="split xml view"/>
+
+    Remember to select `Split` from the top right options of the editor to see the `xml source code` next to the `preview` <img src="images/36-image.png" width="60" alt="split xml view"/>
 
     ```xml
     <?xml version="1.0" encoding="utf-8"?>
@@ -304,9 +349,13 @@ Remember to select `Split` from the top right options of the editor to see the `
     ```
 
     This `xml` creates the design for each of the items, you can see it defines the `image` with a reference of the `ImageView` and the `title` and `description` using `TextView`.
+
     It also set an id for each of the three elements: `item_image`, `item_title` and `item_description`, you will use them later to set the data.
+    
     Is important to notice the `tools` namespace set default values for the `image`, `title` and `description` for testing porposes only, when you run the app, those values are ignored.
+    
     Also, the design relies on `LinearLayout` to organize the items in the screen. At the end it should looks like:
+    <br/>
     <br/>
     <img src="images/37-image.png" width="60%" alt="new layout resource file"/>
     <br/>
@@ -318,6 +367,7 @@ Remember to select `Split` from the top right options of the editor to see the `
     ```
 
 1. Now, replace the `TextView` implementation with this code:
+    
     ```xml
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/clients_recycler_view"
@@ -332,8 +382,11 @@ Remember to select `Split` from the top right options of the editor to see the `
         tools:itemCount="20"
         tools:listitem="@layout/home_item" />
     ```
+
     We are setting the id of the recycler view instance to `clients_recycler_view`, you will use it later.
+
     Also, we are using the `tools` namespace to set the `itemCount="20"` and `listitem`, this will show 20 instances of the home_item in the preview:
+    <br/>
     <br/>
     <img src="images/13-image.png" width="50%" alt="list items preview"/>
     <br/>
@@ -346,10 +399,12 @@ Let's add the `Adapter` for the home screen:
 
 1. Create new package and name it `model`:
     <br/>
+    <br/>
     <img src="images/14-image.png" width="50%"  alt="new model package"/>
     <br/>
 
 1. Inside the new `model` package, create a new `data class` with the name `ItemModel`:
+    <br/>
     <br/>
     <img src="images/15-image.png" width="50%"  alt="new model class"/>
     <br/>
@@ -365,12 +420,17 @@ Let's add the `Adapter` for the home screen:
         val descriptionId: Int
     )
     ```
+
     This class holds the data for each of the items in the home list (image, title and description). As you can see, the data is storing integers, instead of an actual image or strings. 
+
     Those integers, are references to the resources in the bundle of the application. The images are stored into the drawable folder, and are accessed using `R.drawable.`. To access the strings, you can use `R.strings.`
+
     This is useful for our project because we will use mock data to fill those values, and the mock data will be stored in the strings and drawable files.
 
 1. To add the title and description of the items, open the strings resource file at `res/values/strings.xml`.
-Inside the `<resources>` node, replace the placeholder:
+
+    Inside the `<resources>` node, replace the placeholder:
+    
     ```xml
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -397,9 +457,12 @@ Inside the `<resources>` node, replace the placeholder:
     ```
 
 1. Come back to the `ItemModel` we will add a `companion object` to it.
-A `Companion object` is an object declaration inside a class, it is helpful to create `static` properties and variables that belongs to the class instead of the `instances` of that class.
-In our case, we are creating a `static` function named `randomItems()`, this function will return a list of items with title, description and image generated randomly.
-We are also adding a `private property` to the class named `randomItem`, it will create and return the random item used by the `randomItems` function.
+
+    A `Companion object` is an object declaration inside a class, it is helpful to create `static` properties and variables that belongs to the class instead of the `instances` of that class.
+
+    In our case, we are creating a `static` function named `randomItems()`, this function will return a list of items with title, description and image generated randomly.
+
+    We are also adding a `private property` to the class named `randomItem`, it will create and return the random item used by the `randomItems` function.
 
     ```kotlin
     package com.gorillalogic.workshoplayout.model
@@ -468,7 +531,9 @@ We are also adding a `private property` to the class named `randomItem`, it will
 
 1. Now, let's create the Adapter for the list, inside the `home` package create a new `Kotlin` class and with the name `HomeAdapter`:
     <br/>
+    <br/>
     <img src="images/16-image.png" width="80%"  alt="new home adapter class"/>
+    <br/>
     <br/>
     <img src="images/38-image.png" width="50%"  alt="new home adapter class"/>
     <br/>
@@ -491,7 +556,7 @@ We are also adding a `private property` to the class named `randomItem`, it will
     - We are making the `HomeAdapter` extends the `ListAdapter` class. Implementing the `ItemModel` as the object handled by the adapter and a `diffcallback` used to create or reuse items, more on this later.
 
 1. Now, let's add the `view holder` class definition for the items inside the `HomeAdapter` class. Add this code right below the `HomeAdapter` class declaration:
-    
+
     ```kotlin
     {
         //region - View Holder
@@ -515,6 +580,7 @@ We are also adding a `private property` to the class named `randomItem`, it will
     ```
 
     Also add these imports at the top of the class:
+
     ```kotlin
     import android.view.View
     import android.widget.ImageView
@@ -548,6 +614,7 @@ We are also adding a `private property` to the class named `randomItem`, it will
     ```
 
     Also add these imports at the top of the class:
+
     ```kotlin
     import android.view.ViewGroup
     import android.view.LayoutInflater
@@ -558,6 +625,7 @@ We are also adding a `private property` to the class named `randomItem`, it will
      - `onBindViewHolder` is called when the adapter needs to fill the view holder with the data. As you can see we are getting the item data and calling the `bind` function we created before in the `HomeItemViewHolder`
 
 1. Finally, we need to add the `DiffCallback` implementation inside the `Adapter` class:
+    
     ```kotlin
     //region - Companion DiffCallback implementation
     companion object HomeAdapterDiffCallback : DiffUtil.ItemCallback<ItemModel>() {
@@ -578,15 +646,18 @@ We are also adding a `private property` to the class named `randomItem`, it will
     ```
 
     Also add these imports at the top of the class:
+
     ```kotlin
     import androidx.recyclerview.widget.DiffUtil
     ```
 
     This implementation will be used by the adapter to determinate if an item needs to be created from scratch or reused.
+
     The Adapter is ready, that was a lot of work!
 
-1. Now, let's implement the adapter in the home screen. 
-Open the fragment `HomeScreenFragment.kt` and replace content of the `onCreateView` method with this code:
+### Implement Adapter in Home Screen
+
+1. Open the fragment `HomeScreenFragment.kt` and replace content of the `onCreateView` method with this code:
 
     ```kotlin
     // Inflate the layout for this fragment
@@ -605,6 +676,7 @@ Open the fragment `HomeScreenFragment.kt` and replace content of the `onCreateVi
     ```
 
     Also add these imports at the top of the file:
+    
     ```kotlin
     import android.util.Log
     import androidx.recyclerview.widget.RecyclerView
