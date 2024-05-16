@@ -1,6 +1,8 @@
 # 4. View Model
 
-Is a business logic and screen level state holder. It exposes state to the `UI` and encapsulates related business logic. Its principal advantage is that it caches state and persists it through configuration changes.
+Is a business logic and screen level state holder. It exposes state to the `UI` and encapsulates related business logic. 
+
+Its principal advantage is that it caches state and persists it through configuration changes.
 
 ## Data Source
 
@@ -10,7 +12,8 @@ For this project, we will create a data source that create mock data:
 
 1. Create new `package` named `datasource`
     <br/>
-    <img src="images/17-image.png" width="90%"  alt="datasource namespace"/>
+    <br/>
+    <img src="images/17-image.png" width="60%"  alt="datasource namespace"/>
     <br/>
 
 1. Inside the new `datasource` package add a new `Interface` with the name `IItemsDataSource`. Add this code to the body of the interface:
@@ -71,9 +74,12 @@ For this project, we will create a data source that create mock data:
 
 ## Repository
 
-Responsible for handling the communication between the `view model` and the `datasource`. Generally, it is created inside the view model and used to get and send information to and from the datasource.
+Responsible for handling the communication between the `view model` and the `datasource`.
+
+Generally, it is created inside the view model and used to get and send information to and from the datasource.
 
 1. Create new `package` named `repository`
+    <br/>
     <br/>
     <img src="images/17-image.png" width="60%"  alt="datasource namespace"/>
     <br/>
@@ -83,6 +89,7 @@ Responsible for handling the communication between the `view model` and the `dat
     ```kotlin
     suspend fun allItems(): List<ItemModel>
     ```
+
 1. Now, create a new class inside the `repository` package and name it `LocalItemsRepository`. This class will implement the `IItemsRepository` interface:
 
     ```kotlin
@@ -101,14 +108,17 @@ Responsible for handling the communication between the `view model` and the `dat
 
 ## Add View Model
 
-Responsable of handle the communication between the `UI` and the `Models`
+Responsable of handle the communication between the `UI` and the `Models`.
 
 1. Create a new package named `view_model`:
+    <br/>
     <br/>
     <img src="images/17-image.png" width="60%"  alt="datasource namespace"/>
     <br/>
 
-1. Inside the new `view_model` package, create a new class named `ItemsViewModel`. Replace the class implementation with this code:
+1. Inside the new `view_model` package, create a new class named `ItemsViewModel`. 
+    
+    Replace the class implementation with this code:
 
     ```kotlin
     class ItemsViewModel: ViewModel() {
@@ -147,6 +157,7 @@ Responsable of handle the communication between the `UI` and the `Models`
 # Implementing View Model
 
 1. Open the `HomeScreenFragment` and add this new property:
+
     ```kotlin
     //region - Properties
     private val itemsViewModel: ItemsViewModel by activityViewModels()
@@ -154,6 +165,7 @@ Responsable of handle the communication between the `UI` and the `Models`
     ```
 
 2. In the `onViewCreated` method, at the end, use the view model to fetch the items data:
+
     ```kotlin
     // Fetch items data
     itemsViewModel.fetchItems()
@@ -162,6 +174,7 @@ Responsable of handle the communication between the `UI` and the `Models`
 # View Binding
 
 `View Binding` is a feature that makes it easier to write code that interacts with views. Once a view binding is enabled in a module, it generates a binding class for each `XML` layout file present in that module. 
+
 An instance of a binding class contains direct references to all views that have an `ID` in the corresponding layout.
 
 Enable view binding:
@@ -188,11 +201,12 @@ Enable view binding:
     return frameBinding.root
     ```
 
-1. Build and run the application, everything should work as it was before the `view binding` implementation.
+1. Build and run the application, everything should work as it was before the `view binding` implementation, the only difference is that now it is using `View Binding`.
 
 # Data Binding
 
 The `Data Binding` Library is a support library that allows you to bind UI components in your layouts to data sources in your app using a declarative format rather than programmatically.
+
 It not just binds data from code to views, it also binds views to code like `View Binding`.
 
 Let’s implement data binding in our project:
@@ -259,6 +273,7 @@ Open the `fragment_home_screen.xml` file and replace the content with this xml:
 ## Binding Adapters
 
 A `binding adapter` is a feature that allows us to declare in `xml layout` what property of the `view model` we want to use to set the values or characteristics of UI components.
+
 Let’s implement the binding adapter of the items of the home screen:
 
 1. Create new package named `utils`:
@@ -294,6 +309,7 @@ Let’s implement the binding adapter of the items of the home screen:
     ```
 
 1. We need to allow data binding to `observe` the life cycle of the `fragment` and give the data binding access to the view model. 
+
 Add these lines of code right after the declaration of the `frameBinding` in the `onCreateView` method:
 
     ```kotlin

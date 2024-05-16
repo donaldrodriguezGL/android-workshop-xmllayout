@@ -385,7 +385,7 @@ We will start by creating the view holder for the items in the list:
 
     We are setting the id of the recycler view instance to `clients_recycler_view`, you will use it later.
 
-    Also, we are using the `tools` namespace to set the `itemCount="20"` and `listitem`, this will show 20 instances of the home_item in the preview:
+    Also, we are using the `tools` namespace to set the `itemCount` and `listitem`, this will show 20 instances of the `home_item` in the preview:
     <br/>
     <br/>
     <img src="images/13-image.png" width="50%" alt="list items preview"/>
@@ -622,7 +622,7 @@ Let's add the `Adapter` for the home screen:
 
     Here we are `overriding` two methods of the `ListAdapter`:
      - `onCreateViewHolder` is called when the adapter needs a new item for the list, as you can see we inflate the layout `R.layout.home_item` and use it to create a `HomeItemViewHolder` reference.
-     - `onBindViewHolder` is called when the adapter needs to fill the view holder with the data. As you can see we are getting the item data and calling the `bind` function we created before in the `HomeItemViewHolder`
+     - `onBindViewHolder` is called when the adapter needs to fill the view holder with the data. As you can see we are getting the item data and calling the `bind` function we created before in the `HomeItemViewHolder`.
 
 1. Finally, we need to add the `DiffCallback` implementation inside the `Adapter` class:
     
@@ -676,7 +676,7 @@ Let's add the `Adapter` for the home screen:
     ```
 
     Also add these imports at the top of the file:
-    
+
     ```kotlin
     import android.util.Log
     import androidx.recyclerview.widget.RecyclerView
