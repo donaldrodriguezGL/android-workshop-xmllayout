@@ -1,6 +1,7 @@
 # 5. Details Screen
 
 In this last section of the workshop, we will create a new screen to show the details of an item when is selected from the home screen.
+<br/>
 We will use jetpack navigation component to display this new screen when the item is selected.
 
 1. Create new `package` and name if `details`
@@ -143,6 +144,7 @@ We will use jetpack navigation component to display this new screen when the ite
     ```
 
 1. Open the `HomeScreenFragment.kt` and add this code inside the home adapter listener, right after the `Log.d` instruction. 
+<br/>
 With this code, we are updating the selected item data in the view model, so we will be able to access it from the details screen.
     ```kotlin
     Log.d("HomeScreenFragment", "Item Selected ${getString(it.titleId)}")
@@ -157,13 +159,13 @@ It is time to navigate to the details screen to show the details of the selected
 1. Open the `nav_graph.xml` file and add the details screen:
     <br/>
     <br/>
-    <img src="images/21-image.png" width="100%"  alt="add details screen to nav graph"/>
+    <img src="images/21-image.png" width="70%"  alt="add details screen to nav graph"/>
     <br/>
 
 1. Still in `nav_graph`, create a connection between the `home screen` and the `details screen`
     <br/>
     <br/>
-    <img src="images/22-image.png" width="100%" alt="home screen to details screen connection">
+    <img src="images/22-image.png" width="70%" alt="home screen to details screen connection">
     <br/>
 
 1. In the properties of the connection you can see the `id` of it, select and copy it, you will need it to trigger the navigation from the `main screen`

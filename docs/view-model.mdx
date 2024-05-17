@@ -427,7 +427,15 @@ Let’s implement the binding adapter for the items of the home screen:
     //endregion
     ```
 
-1.  Remove the `onViewCreated` methodm, it is not needed anymore
+1.  Replace the `onViewCreated` method, with this new definition:
+    ```kotlin
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Fetch items
+        itemsViewModel.fetchItems()
+    }
+    ```
 
 1. We need to allow data binding to `observe` the life cycle of the `fragment` and give the data binding access to the view model. 
     <br/>
