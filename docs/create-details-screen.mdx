@@ -1,37 +1,21 @@
 # 5. Details Screen
 
-This screen will show the information of the selected itemfrom the main screen.
+In this last section of the workshop, we will create a new screen to show the details of an item when is selected from the home screen.
+We will use jetpack navigation component to display this new screen when the item is selected.
 
 1. Create new `package` and name if `details`
     <br/>
-    <img src="images/20-image.png" width="70%"  alt="details package"/>
+    <br/>
+    <img src="images/48-image.png" width="70%"  alt="details package"/>
     <br/>
 
-1. Create a new `blank fragment` inside the `details package` and name it `DetailsScreenFragment` and replace the code with this:
-
-    ```kotlin
-    class DetailsScreenFragment : Fragment() {
-        //region - Properties
-        private val itemsViewModel: ItemsViewModel by activityViewModels()
-        //endregion
-        
-        override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-        ): View {
-            // Inflate the layout for this fragment
-            val frameBinding = FragmentDetailsScreenBinding.inflate(inflater, container, false)
-            frameBinding.apply {
-                // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
-                lifecycleOwner = viewLifecycleOwner
-                // Giving the binding access to the ViewModel
-                selectedItem = itemsViewModel.selectedItem.value
-            }
-            return frameBinding.root
-        }
-    }
-    ```
+1. Create a new `blank fragment` inside the `details` package and name it `DetailsScreenFragment`:
+    <br/>
+    <br/>
+    <img src="images/49-image.png" width="80%"  alt="new details fragment"/>
+    <br/>
+    <img src="images/50-image.png" width="80%"  alt="new details fragment"/>
+    <br/>
 
 1. Open the layout file `fragment_details_screen.xml` and replace the content with this `xml`:
 
@@ -95,8 +79,45 @@ This screen will show the information of the selected itemfrom the main screen.
     </layout>
     ```
 
-1. Open the file `BindingAdapter.kt` and add three new adapters for the image, title and
-description of the item:
+1. Now, open the source code file `DetailsScreenFragment.kt` and replace the contents of it with the next code:
+
+    ```kotlin
+    package com.gorillalogic.workshoplayout.details
+
+    import android.os.Bundle
+    import androidx.fragment.app.Fragment
+    import android.view.LayoutInflater
+    import android.view.View
+    import android.view.ViewGroup
+    import androidx.fragment.app.activityViewModels
+    import com.gorillalogic.workshoplayout.databinding.FragmentDetailsScreenBinding
+    import com.gorillalogic.workshoplayout.view_model.ItemsViewModel
+
+    class DetailsScreenFragment : Fragment() {
+        
+        //region - Properties
+        private val itemsViewModel: ItemsViewModel by activityViewModels()
+        //endregion
+
+        override fun onCreateView(
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
+        ): View {
+            // Inflate the layout for this fragment
+            val frameBinding = FragmentDetailsScreenBinding.inflate(inflater, container, false)
+            frameBinding.apply {
+                // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
+                lifecycleOwner = viewLifecycleOwner
+                // Giving the binding access to the ViewModel
+                selectedItem = itemsViewModel.selectedItem.value
+            }
+            return frameBinding.root
+        }
+    }
+    ```
+
+1. Open the file `BindingAdapter.kt` and add three new adapters for the image, title and description of the item:
 
     ```kotlin
     @BindingAdapter("itemImage")
@@ -115,47 +136,48 @@ description of the item:
     }
     ```
 
-1. Open the file `ItemsViewModel.kt` and add a property for the selected item:
-    
+    You also need to add these three imports at the top of the file:
     ```kotlin
-    // Store the selected item data
-    private val _selectedItem = MutableLiveData<ItemModel>()
-    val selectedItem: LiveData<ItemModel> = _selectedItem
+    import android.widget.ImageView
+    import android.widget.TextView
     ```
 
-1. Also add a function to update the selected item:
-
+1. Open the `HomeScreenFragment.kt` and add this code inside the home adapter listener, right after the `Log.d` instruction. 
+With this code, we are updating the selected item data in the view model, so we will be able to access it from the details screen.
     ```kotlin
-    fun updateSelectedItem(item: ItemModel) {
-        _selectedItem.value = item
-    }
-    ```
-
-1. Open the `HomeScreenFragment.kt` and add this code inside the home adapter listener:
-    ```kotlin
+    Log.d("HomeScreenFragment", "Item Selected ${getString(it.titleId)}")
     // Update selected item in the view model
     itemsViewModel.updateSelectedItem(it)
     ```
 
 ## Add detail screen to the navigation
 
+It is time to navigate to the details screen to show the details of the selected item:
+
 1. Open the `nav_graph.xml` file and add the details screen:
+    <br/>
     <br/>
     <img src="images/21-image.png" width="100%"  alt="add details screen to nav graph"/>
     <br/>
 
 1. Still in `nav_graph`, create a connection between the `home screen` and the `details screen`
     <br/>
+    <br/>
     <img src="images/22-image.png" width="100%" alt="home screen to details screen connection">
     <br/>
 
 1. In the properties of the connection you can see the `id` of it, select and copy it, you will need it to trigger the navigation from the `main screen`
     <br/>
+    <br/>
     <img src="images/23-image.png" width="100%" alt="home screen to details screen connection">
     <br/>
 
-1. Open the `HomeScreenFragment.kt` and add this code to navigate to the details screen:
+1. Open the `HomeScreenFragment.kt` and add this code to navigate to the details screen, right after the last instruction you added to update the selected item:
     ```kotlin
+    // Update selected item in the view model
+    itemsViewModel.updateSelectedItem(it)
     // Navigate to details screen
     findNavController().navigate(R.id.action_homeScreenFragment_to_detailsScreenFragment)
     ```
+
+1. Run and test the app, you should be able to select an item from the main screen and the app will navigate to the details screen showing the selected item data.
