@@ -161,7 +161,6 @@ Generally, it is created inside the view model and used to get and send informat
         //endregion
     }
     ```
-    <br/>
     This repository get a `dataSource` as parameter of type `IItemsDataSource`, that means any class that implements this interface could be send as parameter.
     <br/>
     In our case, we will send a reference of `LocalItemsDataSource` that will load the data from local resources.
@@ -229,7 +228,6 @@ Responsable of handle the communication between the `UI` and the `Models`.
     }
     ```
 
-    <br/>
     Ok, let's review what the `ItemsViewModel` does:
     <br/>
     First, we make the view model extends the native class `ViewModel`, that give this class all the behaviour required to handle and manage states of data and relate them with the lifecycles of the app.
@@ -327,8 +325,8 @@ Let’s implement data binding in our project:
     ```
 
 1. We also need to add the `Kapt (the Kotlin Annotation Processing Tool)` plugin, it allows us to use `Java` annotation processors with `Kotlin` code, even if those processors don't have specific support for Kotlin.
-<br/>
-The plugins object is at the top of the graddle file, add this directive at the end of it
+    <br/>
+    The plugins object is at the top of the graddle file, add this directive at the end of it
 
     ```kotlin
     plugins {
@@ -410,7 +408,7 @@ Let’s implement the binding adapter for the items of the home screen:
         adapter.submitList(data)
     }
     ```
-    <br/>
+    
     What we are doing here is creating a `binding adapter` that will get the `recyclerView` and the list of items we want to add to it.
     <br/>
     The binding adapter will set the list of the adapter with the data sent by parameter.
